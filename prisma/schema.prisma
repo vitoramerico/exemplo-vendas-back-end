@@ -1,0 +1,64 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider      = "prisma-client-js"
+  binaryTargets = ["native", "debian-openssl-1.1.x"]
+}
+
+model Customer {
+  id       String    @id @default(uuid())
+  name     String
+  email    String
+  cpf      String    @unique
+  createAt DateTime
+  updateAt DateTime? @updatedAt
+  orders   Order[]
+}
+
+model User {
+  id       String    @id @default(uuid())
+  name     String
+  email    String    @unique
+  password String
+  createAt DateTime
+  updateAt DateTime? @updatedAt
+}
+
+model Product {
+  id          String       @id @default(uuid())
+  description String
+  brand       String
+  value       Float
+  createAt    DateTime
+  updateAt    DateTime?    @updatedAt
+  ItensOrder  ItensOrder[]
+}
+
+model Order {
+  id         String       @id @default(uuid())
+  note       String
+  createAt   DateTime
+  updateAt   DateTime?    @updatedAt
+  customerId String
+  Customer   Customer     @relation(fields: [customerId], references: [id])
+  itens      ItensOrder[]
+}
+
+model ItensOrder {
+  id        String    @id @default(uuid())
+  amount    Float
+  value     Float
+  total     Float
+  createAt  DateTime
+  updateAt  DateTime? @updatedAt
+  produtcId String
+  Product   Product   @relation(fields: [produtcId], references: [id])
+  orderId   String
+  Order     Order     @relation(fields: [orderId], references: [id])
+}
