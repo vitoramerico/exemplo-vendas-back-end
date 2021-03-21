@@ -4,11 +4,11 @@ import {
   Get,
   HttpCode,
   Logger,
-  Param,
   Post,
   Query,
 } from '@nestjs/common';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
+import { ItensOrderEntity } from '../../domain/entities/itens_order.entity';
 import { OrderEntity } from '../../domain/entities/order.entity';
 import { IOrderAdd } from '../../domain/usecases/order_add/order_add.interface';
 import { IOrderGetAll } from '../../domain/usecases/order_get_all/order_get_all.interface';
@@ -35,6 +35,15 @@ export class OrderController {
       createProductDto.note,
       createProductDto.customerId,
       new Date(),
+      null,
+      null,
+      createProductDto.itens.map(v => new ItensOrderEntity(
+        v.amount,
+        v.value,
+        v.total,
+        v.produtcId,
+        new Date(),
+      )),
     );
 
     const result = await this.orderAdd.call(orderEntity);

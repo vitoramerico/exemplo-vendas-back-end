@@ -6,7 +6,7 @@ export class ItensOrderEntity extends BaseEntity {
   value: number;
   total: number;
   produtcId: string;
-  orderId: string;
+  orderId?: string;
   product?: ProductEntity;
 
   constructor(
@@ -14,8 +14,8 @@ export class ItensOrderEntity extends BaseEntity {
     value: number,
     total: number,
     produtcId: string,
-    orderId: string,
     createAt: Date,
+    orderId?: string,
     id?: string,
     product?: ProductEntity,
   ) {

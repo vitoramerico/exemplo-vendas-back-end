@@ -15,6 +15,9 @@ export class OrderRepository implements IOrderRepository {
       Customer: {
         connect: { id: orderEntity.customerId },
       },
+      itens: {
+        create: orderEntity.itens,
+      },
       createAt: orderEntity.createAt,
       updateAt: orderEntity.updateAt,
     };
