@@ -3,17 +3,22 @@
 </p>
 
 ## Descrição
+
 Exemplo de API desenvolvida em Nest + Prisma para sistema de venda feito em Flutter
 
 ## Instalacao
+
 ```bash
 # sobe os containers
 $ docker-compose up
+# abre o container da aplicacao
+$ docker-compose exec app bash
 # cria e executa a primeira migracao para criar as tabelas
 $ npx prisma migrate dev --preview-feature
 ```
 
 ## Urls
+
 - [Swagger](http://localhost:3000/api/)
 - [pgAdmin](http://localhost:9000/)
 - [Prisma Studio](http://localhost:5555/)
@@ -33,6 +38,8 @@ $ npx prisma migrate dev --preview-feature
 # redefine o banco de dados e executa a migracao
 $ npx prisma migrate reset --preview-feature
 ```
+
 ## Documentações
+
 - [Nest](https://nestjs.com/)
 - [Prisma](https://www.prisma.io/)
