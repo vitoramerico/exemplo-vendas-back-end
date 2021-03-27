@@ -43,10 +43,9 @@ export class UserController {
   })
   async login(
     @Query('login') login: String,
-    @Query('senha') senha: String,
+    @Query('password') password: String,
   ): Promise<UserEntity> {
-    this.logger.log(`login: ${login}, senha: ${senha}`);
-    return this.userLogin.call(login, senha);
+    return this.userLogin.call(login, password);
   }
 
   @Get('getAll')
