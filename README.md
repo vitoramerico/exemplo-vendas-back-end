@@ -7,7 +7,10 @@ Exemplo de API desenvolvida em Nest + Prisma para sistema de venda feito em Flut
 
 ## Instalacao
 ```bash
+# sobe os containers
 $ docker-compose up
+# cria e executa a primeira migracao para criar as tabelas
+$ npx prisma migrate dev --preview-feature
 ```
 
 ## Urls
