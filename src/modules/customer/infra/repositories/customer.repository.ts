@@ -4,7 +4,6 @@ import { CustomerEntity } from '../../domain/entities/customer.entity';
 import { ICustomerRepository } from '../../domain/repositories/customer.interface.repository';
 import { ICustomerDatasource } from '../datasources/customer.datasource.interface';
 
-
 @Injectable()
 export class CustomerRepository implements ICustomerRepository {
   private readonly logger = new Logger('teste');
@@ -46,8 +45,10 @@ export class CustomerRepository implements ICustomerRepository {
     });
   }
 
-  async getByCpf(cpf: string): Promise<CustomerEntity> {
+  async getByCpf(cpf: string): Promise<CustomerEntity | null> {
     const result = await this.customerDataSource.get({ cpf: cpf });
+
+    if (result == null) return null;
 
     return new CustomerEntity(
       result.name,
