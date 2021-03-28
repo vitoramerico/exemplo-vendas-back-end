@@ -37,12 +37,14 @@ export class OrderController {
       new Date(),
       null,
       null,
+      null,
       createProductDto.itens.map(v => new ItensOrderEntity(
         v.amount,
         v.value,
         v.total,
         v.produtcId,
         new Date(),
+        null,
       )),
     );
 

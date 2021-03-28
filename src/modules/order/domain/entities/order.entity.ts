@@ -12,11 +12,12 @@ export class OrderEntity extends BaseEntity {
     note: string,
     customerId: string,
     createAt: Date,
+    updateAt?: Date,
     id?: string,
     customer?: CustomerEntity,
     itens?: ItensOrderEntity[],
   ) {
-    super(createAt, id);
+    super(createAt, updateAt, id);
     this.note = note;
     this.customerId = customerId;
     this.customer = customer;

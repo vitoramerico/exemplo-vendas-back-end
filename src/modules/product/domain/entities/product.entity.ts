@@ -10,9 +10,10 @@ export class ProductEntity extends BaseEntity {
     brand: string,
     value: number,
     createAt: Date,
+    updateAt?: Date,
     id?: string,
   ) {
-    super(createAt, id);
+    super(createAt, updateAt, id);
     this.description = description;
     this.brand = brand;
     this.value = value;

@@ -1,13 +1,13 @@
 import { Injectable } from '@nestjs/common';
 import { ProductEntity } from '../../entities/product.entity';
 import { IProductRepository } from '../../repositories/product.interface.repository';
-import { IProductAdd } from './product_add.interface';
+import { IProductEdit } from './product_edit.interface';
 
 @Injectable()
-export class ProductAdd implements IProductAdd {
+export class ProductEdit implements IProductEdit {
   constructor(private readonly repository: IProductRepository) {}
 
   call(productEntity: ProductEntity): Promise<string> {
-    return this.repository.add(productEntity);
+    return this.repository.edit(productEntity);
   }
 }

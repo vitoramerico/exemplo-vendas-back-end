@@ -1,4 +1,5 @@
 import { Injectable } from '@nestjs/common';
+import { Prisma } from '@prisma/client';
 import { ProductEntity } from '../../domain/entities/product.entity';
 import { IProductRepository } from '../../domain/repositories/product.interface.repository';
 import { IProductDatasource } from '../datasource/product.interface.datasource';
@@ -8,16 +9,24 @@ export class ProductRepository implements IProductRepository {
   constructor(private readonly productDataSource: IProductDatasource) {}
 
   async add(productEntity: ProductEntity): Promise<string> {
-    const data: ProductEntity = {
+    const result = await this.productDataSource.add(productEntity);
+
+    return result.id;
+  }
+
+  async edit(productEntity: ProductEntity): Promise<string> {
+    const data: Prisma.ProductUpdateInput = {
       id: productEntity.id,
       description: productEntity.description,
       brand: productEntity.brand,
       value: productEntity.value,
-      createAt: productEntity.createAt,
       updateAt: productEntity.updateAt,
     };
 
-    const result = await this.productDataSource.add(data);
+    const result = await this.productDataSource.edit({
+      where: { id: productEntity.id },
+      data,
+    });
 
     return result.id;
   }
@@ -32,6 +41,7 @@ export class ProductRepository implements IProductRepository {
       result.brand,
       result.value,
       result.createAt,
+      result.updateAt,
       result.id,
     );
   }
@@ -41,7 +51,14 @@ export class ProductRepository implements IProductRepository {
 
     return lstResult.map(
       (v) =>
-        new ProductEntity(v.description, v.brand, v.value, v.createAt, v.id),
+        new ProductEntity(
+          v.description,
+          v.brand,
+          v.value,
+          v.createAt,
+          v.updateAt,
+          v.id,
+        ),
     );
   }
 }

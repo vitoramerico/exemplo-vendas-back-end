@@ -19,15 +19,34 @@ export class UserController {
   ) {}
 
   @Post('add')
-  @ApiOperation({ summary: 'Cria login do usuario' })
+  @ApiOperation({ summary: 'Cadastra usuario' })
   @ApiResponse({ status: 200, description: 'Sucesso' })
   @HttpCode(200)
-  async add(@Body() createUserDto: CreateUserDto): Promise<String> {
+  async add(@Body() createUserDto: CreateUserDto): Promise<string> {
     const userEntity = new UserEntity(
       createUserDto.name,
       createUserDto.email,
       createUserDto.password,
       new Date(),
+    );
+
+    const result = await this.userAdd.call(userEntity);
+
+    return result;
+  }
+
+  @Post('edit')
+  @ApiOperation({ summary: 'Altera usuario' })
+  @ApiResponse({ status: 200, description: 'Sucesso' })
+  @HttpCode(200)
+  async edit(@Body() createUserDto: CreateUserDto): Promise<string> {
+    const userEntity = new UserEntity(
+      createUserDto.name,
+      createUserDto.email,
+      createUserDto.password,
+      new Date(),
+      new Date(),
+      createUserDto.id,
     );
 
     const result = await this.userAdd.call(userEntity);
@@ -42,8 +61,8 @@ export class UserController {
     description: 'Sucesso',
   })
   async login(
-    @Query('login') login: String,
-    @Query('password') password: String,
+    @Query('login') login: string,
+    @Query('password') password: string,
   ): Promise<UserEntity> {
     return this.userLogin.call(login, password);
   }

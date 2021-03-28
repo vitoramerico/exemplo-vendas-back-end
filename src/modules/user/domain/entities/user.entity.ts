@@ -10,9 +10,10 @@ export class UserEntity extends BaseEntity {
     email: string,
     password: string,
     createAt: Date,
+    updateAt?: Date,
     id?: string,
   ) {
-    super(createAt, id);
+    super(createAt, updateAt, id);
     this.name = name;
     this.email = email;
     this.password = password;

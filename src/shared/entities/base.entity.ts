@@ -5,9 +5,9 @@ export abstract class BaseEntity {
   createAt: Date;
   updateAt: Date;
 
-  constructor(createAt: Date, id?: string) {
+  constructor(createAt: Date, updateAt?: Date, id?: string) {
     this.id = id ?? uuidv4();
     this.createAt = createAt;
-    this.updateAt = new Date();
+    this.updateAt = updateAt ?? new Date();
   }
 }

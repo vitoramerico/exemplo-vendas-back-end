@@ -15,11 +15,12 @@ export class ItensOrderEntity extends BaseEntity {
     total: number,
     produtcId: string,
     createAt: Date,
+    updateAt?: Date,
     orderId?: string,
     id?: string,
     product?: ProductEntity,
   ) {
-    super(createAt, id);
+    super(createAt, updateAt, id);
     this.amount = amount;
     this.value = value;
     this.total = total;

@@ -10,9 +10,10 @@ export class CustomerEntity extends BaseEntity {
     email: string,
     cpf: string,
     createAt: Date,
+    updateAt?: Date,
     id?: string,
   ) {
-    super(createAt, id);
+    super(createAt, updateAt, id);
     this.name = name;
     this.email = email;
     this.cpf = cpf;

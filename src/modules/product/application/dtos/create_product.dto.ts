@@ -2,6 +2,9 @@ import { ApiProperty } from '@nestjs/swagger';
 import { IsCurrency, IsNotEmpty, Min } from 'class-validator';
 
 export class CreateProductDto {
+  @ApiProperty()
+  readonly id: string;
+
   @IsNotEmpty({ message: 'Nome nao pode ser em branco' })
   @ApiProperty()
   readonly description: string;

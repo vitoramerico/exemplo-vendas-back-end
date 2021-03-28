@@ -1,4 +1,5 @@
 import { Injectable } from '@nestjs/common';
+import { Prisma } from '@prisma/client';
 import { UserEntity } from '../../domain/entities/user.entity';
 import { IUserRepository } from '../../domain/repositories/user.interface.repository';
 import { IUserDatasource } from '../datasource/user.interface.datasource';
@@ -8,16 +9,24 @@ export class UserRepository implements IUserRepository {
   constructor(private readonly userDataSource: IUserDatasource) {}
 
   async add(userEntity: UserEntity): Promise<string> {
-    const data: UserEntity = {
+    const result = await this.userDataSource.add(userEntity);
+    
+    return result.id;
+  }
+
+  async edit(userEntity: UserEntity): Promise<string> {
+    const data: Prisma.UserUpdateInput = {
       id: userEntity.id,
       name: userEntity.name,
       email: userEntity.email,
       password: userEntity.password,
-      createAt: userEntity.createAt,
       updateAt: userEntity.updateAt,
     };
 
-    const result = await this.userDataSource.add(data);
+    const result = await this.userDataSource.edit({
+      where: { id: userEntity.id },
+      data,
+    });
 
     return result.id;
   }
@@ -35,6 +44,7 @@ export class UserRepository implements IUserRepository {
       result.email,
       '',
       result.createAt,
+      result.updateAt,
       result.id,
     );
   }
@@ -51,6 +61,7 @@ export class UserRepository implements IUserRepository {
       result.email,
       '',
       result.createAt,
+      result.updateAt,
       result.id,
     );
   }
@@ -59,7 +70,7 @@ export class UserRepository implements IUserRepository {
     const lstResult = await this.userDataSource.getAll({});
 
     return lstResult.map(
-      (v) => new UserEntity(v.name, v.email, '', v.createAt, v.id),
+      (v) => new UserEntity(v.name, v.email, '', v.createAt, v.updateAt, v.id),
     );
   }
 }

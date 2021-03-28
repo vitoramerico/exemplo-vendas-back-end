@@ -2,6 +2,9 @@ import { ApiProperty } from '@nestjs/swagger';
 import { IsEmail, IsNotEmpty, MaxLength, MinLength } from 'class-validator';
 
 export class CreateUserDto {
+  @ApiProperty()
+  readonly id: string;
+
   @IsNotEmpty({ message: 'Nome nao pode ser em branco' })
   @ApiProperty()
   readonly name: string;
