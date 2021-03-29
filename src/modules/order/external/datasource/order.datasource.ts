@@ -28,10 +28,10 @@ export class OrderDataSource implements IOrderDatasource {
     where?: Prisma.OrderWhereInput,
     includeItens = false,
     includeCustomer = false,
-  ): Promise<(Order & { itens: ItensOrder[]; Customer: Customer }) | null> {
+  ): Promise<(Order & { itens: ItensOrder[]; customer: Customer }) | null> {
     return this.prisma.order.findFirst({
       where: where,
-      include: { itens: includeItens, Customer: includeCustomer },
+      include: { itens: includeItens ? {include: {product: true}} : false, customer: includeCustomer },
     });
   }
 
@@ -45,7 +45,7 @@ export class OrderDataSource implements IOrderDatasource {
     },
     includeItens = false,
     includeCustomer = false,
-  ): Promise<(Order & { itens: ItensOrder[]; Customer: Customer })[]> {
+  ): Promise<(Order & { itens: ItensOrder[]; customer: Customer })[]> {
     const { skip, take, cursor, where, orderBy } = params;
 
     return this.prisma.order.findMany({
@@ -54,7 +54,7 @@ export class OrderDataSource implements IOrderDatasource {
       cursor,
       where,
       orderBy,
-      include: { itens: includeItens, Customer: includeCustomer },
+      include: { itens: includeItens, customer: includeCustomer },
     });
   }
 }

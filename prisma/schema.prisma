@@ -46,7 +46,7 @@ model Order {
   createAt   DateTime
   updateAt   DateTime?    @updatedAt
   customerId String
-  Customer   Customer     @relation(fields: [customerId], references: [id])
+  customer   Customer     @relation(fields: [customerId], references: [id])
   itens      ItensOrder[]
 }
 
@@ -58,7 +58,7 @@ model ItensOrder {
   createAt  DateTime
   updateAt  DateTime? @updatedAt
   produtcId String
-  Product   Product   @relation(fields: [produtcId], references: [id])
+  product   Product   @relation(fields: [produtcId], references: [id])
   orderId   String
   Order     Order     @relation(fields: [orderId], references: [id])
 }

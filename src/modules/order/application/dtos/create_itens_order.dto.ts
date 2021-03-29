@@ -2,6 +2,8 @@ import { ApiProperty } from '@nestjs/swagger';
 import { IsNotEmpty } from 'class-validator';
 
 export class CreateItensOrderDto {
+  @ApiProperty()
+  readonly id: string;
   @IsNotEmpty({ message: 'Quantidade nao pode ser em branco' })
   @ApiProperty()
   readonly amount: number;

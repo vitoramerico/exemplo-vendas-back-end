@@ -8,6 +8,8 @@ import { ProductEdit } from './domain/usecases/product_edit/product_edit';
 import { IProductEdit } from './domain/usecases/product_edit/product_edit.interface';
 import { ProductGetAll } from './domain/usecases/product_get_all/product_get_all';
 import { IProductGetAll } from './domain/usecases/product_get_all/product_get_all.interface';
+import { ProductGetById } from './domain/usecases/product_get_by_id/product_get_by_id';
+import { IProductGetById } from './domain/usecases/product_get_by_id/product_get_by_id.interface';
 import { ProductDataSource } from './external/datasource/product.datasource';
 import { IProductDatasource } from './infra/datasource/product.interface.datasource';
 import { ProductRepository } from './infra/repositories/product.repository';
@@ -31,6 +33,10 @@ import { ProductRepository } from './infra/repositories/product.repository';
     {
       provide: IProductEdit,
       useClass: ProductEdit,
+    },
+    {
+      provide: IProductGetById,
+      useClass: ProductGetById,
     },
     {
       provide: IProductGetAll,

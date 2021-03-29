@@ -12,7 +12,7 @@ export class OrderRepository implements IOrderRepository {
     const data: Prisma.OrderCreateInput = {
       id: orderEntity.id,
       note: orderEntity.note,
-      Customer: {
+      customer: {
         connect: { id: orderEntity.customerId },
       },
       itens: {
@@ -23,6 +23,28 @@ export class OrderRepository implements IOrderRepository {
     };
 
     const result = await this.orderDataSource.add(data);
+
+    return result.id;
+  }
+
+  async edit(orderEntity: OrderEntity): Promise<string> {
+    const data: Prisma.OrderUpdateInput = {
+      id: orderEntity.id,
+      note: orderEntity.note,
+      customer: {
+        connect: { id: orderEntity.customerId },
+      },
+      itens: {
+        deleteMany: {},
+        create: orderEntity.itens,
+      },
+      updateAt: orderEntity.updateAt,
+    };
+
+    const result = await this.orderDataSource.edit({
+      where: { id: orderEntity.id },
+      data,
+    });
 
     return result.id;
   }
@@ -38,7 +60,7 @@ export class OrderRepository implements IOrderRepository {
       result.createAt,
       result.updateAt,
       result.id,
-      result.Customer,
+      result.customer,
       result.itens,
     );
   }
@@ -54,7 +76,7 @@ export class OrderRepository implements IOrderRepository {
           v.createAt,
           v.updateAt,
           v.id,
-          v.Customer,
+          v.customer,
           v.itens,
         ),
     );

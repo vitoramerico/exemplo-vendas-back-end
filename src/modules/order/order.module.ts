@@ -4,6 +4,8 @@ import { OrderController } from './application/controller/order_controller';
 import { IOrderRepository } from './domain/repositories/order.interface.repository';
 import { OrderAdd } from './domain/usecases/order_add/order_add';
 import { IOrderAdd } from './domain/usecases/order_add/order_add.interface';
+import { OrderEdit } from './domain/usecases/order_edit/order_edit';
+import { IOrderEdit } from './domain/usecases/order_edit/order_edit.interface';
 import { OrderGetAll } from './domain/usecases/order_get_all/order_get_all';
 import { IOrderGetAll } from './domain/usecases/order_get_all/order_get_all.interface';
 import { OrderGetById } from './domain/usecases/order_get_by_id/order_get_by_id';
@@ -27,6 +29,10 @@ import { OrderRepository } from './infra/repositories/order.repository';
     {
       provide: IOrderAdd,
       useClass: OrderAdd,
+    },
+    {
+      provide: IOrderEdit,
+      useClass: OrderEdit,
     },
     {
       provide: IOrderGetById,

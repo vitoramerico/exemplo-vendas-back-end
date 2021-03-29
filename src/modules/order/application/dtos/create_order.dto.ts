@@ -7,7 +7,9 @@ import {
 import { CreateItensOrderDto } from './create_itens_order.dto';
 
 export class CreateOrderDto {
-  @IsNotEmpty({ message: 'Nome nao pode ser em branco' })
+  @ApiProperty()
+  readonly id: string;
+
   @ApiProperty()
   readonly note: string;
 

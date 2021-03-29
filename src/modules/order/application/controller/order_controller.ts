@@ -11,6 +11,7 @@ import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { ItensOrderEntity } from '../../domain/entities/itens_order.entity';
 import { OrderEntity } from '../../domain/entities/order.entity';
 import { IOrderAdd } from '../../domain/usecases/order_add/order_add.interface';
+import { IOrderEdit } from '../../domain/usecases/order_edit/order_edit.interface';
 import { IOrderGetAll } from '../../domain/usecases/order_get_all/order_get_all.interface';
 import { IOrderGetById } from '../../domain/usecases/order_get_by_id/order_get_by_id.interface';
 import { CreateOrderDto } from '../dtos/create_order.dto';
@@ -22,12 +23,13 @@ export class OrderController {
 
   constructor(
     private readonly orderAdd: IOrderAdd,
+    private readonly orderEdit: IOrderEdit,
     private readonly orderGetAll: IOrderGetAll,
     private readonly orderGetById: IOrderGetById,
   ) {}
 
   @Post('add')
-  @ApiOperation({ summary: 'Realiza venda' })
+  @ApiOperation({ summary: 'Cadastra uma venda' })
   @ApiResponse({ status: 200, description: 'Sucesso' })
   @HttpCode(200)
   async add(@Body() createProductDto: CreateOrderDto): Promise<String> {
@@ -49,6 +51,33 @@ export class OrderController {
     );
 
     const result = await this.orderAdd.call(orderEntity);
+
+    return result;
+  }
+
+  @Post('edit')
+  @ApiOperation({ summary: 'Altera uma venda' })
+  @ApiResponse({ status: 200, description: 'Sucesso' })
+  @HttpCode(200)
+  async edit(@Body() createProductDto: CreateOrderDto): Promise<String> {
+    const orderEntity = new OrderEntity(
+      createProductDto.note,
+      createProductDto.customerId,
+      new Date(),
+      new Date(),
+      createProductDto.id,
+      null,
+      createProductDto.itens.map(v => new ItensOrderEntity(
+        v.amount,
+        v.value,
+        v.total,
+        v.produtcId,
+        new Date(),
+        new Date(),
+      )),
+    );
+
+    const result = await this.orderEdit.call(orderEntity);
 
     return result;
   }

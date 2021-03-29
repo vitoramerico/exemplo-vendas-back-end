@@ -11,7 +11,7 @@ export abstract class IOrderDatasource {
     where?: Prisma.OrderWhereInput,
     includeItens?: boolean,
     includeCustomer?: boolean,
-  ): Promise<(Order & { itens: ItensOrder[]; Customer: Customer }) | null>;
+  ): Promise<(Order & { itens: ItensOrder[]; customer: Customer }) | null>;
   abstract getAll(
     params: {
       skip?: number;
@@ -22,5 +22,5 @@ export abstract class IOrderDatasource {
     },
     includeItens?: boolean,
     includeCustomer?: boolean,
-  ): Promise<(Order & { itens: ItensOrder[]; Customer: Customer })[]>;
+  ): Promise<(Order & { itens: ItensOrder[]; customer: Customer })[]>;
 }
