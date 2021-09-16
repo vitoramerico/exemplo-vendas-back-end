@@ -9,6 +9,8 @@ services:
       - 3000:3000
       - 9229:9229
       - 5555:5555
+    depends_on:
+      - db
     volumes:
       - .:/home/node/app
   

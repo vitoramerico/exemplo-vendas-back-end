@@ -35,7 +35,7 @@ export class CustomerDataSource implements ICustomerDatasource {
     take?: number;
     cursor?: Prisma.CustomerWhereUniqueInput;
     where?: Prisma.CustomerWhereInput;
-    orderBy?: Prisma.CustomerOrderByInput;
+    orderBy?: Prisma.CustomerOrderByWithRelationInput;
   }): Promise<Customer[]> {
     const { skip, take, cursor, where, orderBy } = params;
 

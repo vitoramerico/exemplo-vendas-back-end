@@ -41,7 +41,7 @@ export class OrderDataSource implements IOrderDatasource {
       take?: number;
       cursor?: Prisma.OrderWhereUniqueInput;
       where?: Prisma.OrderWhereInput;
-      orderBy?: Prisma.OrderOrderByInput;
+      orderBy?: Prisma.OrderOrderByWithRelationInput;
     },
     includeItens = false,
     includeCustomer = false,

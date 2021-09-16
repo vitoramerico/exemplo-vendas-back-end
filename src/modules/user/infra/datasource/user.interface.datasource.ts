@@ -10,6 +10,6 @@ export abstract class IUserDatasource {
       take?: number;
       cursor?: Prisma.UserWhereUniqueInput;
       where?: Prisma.UserWhereInput;
-      orderBy?: Prisma.UserOrderByInput;
+      orderBy?: Prisma.UserOrderByWithRelationInput;
     }): Promise<User[]>;
 }

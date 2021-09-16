@@ -1,4 +1,7 @@
 #!/bin/bash
 
 npm install
-npm run start:debug
+
+npm run prisma:generate
+
+npm run start:dev

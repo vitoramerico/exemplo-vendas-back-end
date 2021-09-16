@@ -18,7 +18,7 @@ export abstract class IOrderDatasource {
       take?: number;
       cursor?: Prisma.OrderWhereUniqueInput;
       where?: Prisma.OrderWhereInput;
-      orderBy?: Prisma.OrderOrderByInput;
+      orderBy?: Prisma.OrderOrderByWithRelationInput;
     },
     includeItens?: boolean,
     includeCustomer?: boolean,

@@ -10,6 +10,6 @@ export abstract class IProductDatasource {
       take?: number;
       cursor?: Prisma.ProductWhereUniqueInput;
       where?: Prisma.ProductWhereInput;
-      orderBy?: Prisma.ProductOrderByInput;
+      orderBy?: Prisma.ProductOrderByWithRelationInput;
     }): Promise<Product[]>;
 }

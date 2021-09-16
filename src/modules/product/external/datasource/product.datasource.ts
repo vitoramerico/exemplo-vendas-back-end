@@ -33,7 +33,7 @@ export class ProductDataSource implements IProductDatasource {
     take?: number;
     cursor?: Prisma.ProductWhereUniqueInput;
     where?: Prisma.ProductWhereInput;
-    orderBy?: Prisma.ProductOrderByInput;
+    orderBy?: Prisma.ProductOrderByWithRelationInput;
   }): Promise<Product[]> {
     const { skip, take, cursor, where, orderBy } = params;
 
